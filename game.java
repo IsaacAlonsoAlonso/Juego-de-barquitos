@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class game
 {
     // instance variables - replace the example below with your own
-    private Canvas tablero;
+    private ArrayList<Canvas> tablero;
 
     /**
      * Constructor for objects of class tablero
@@ -19,15 +19,18 @@ public class game
     public game()
     {
         // initialise instance variables
-        tablero=new Canvas("Jugador1");
-        //tablero.add(new Canvas("Jugador2"));
-        for (int x=0; x<924;){
-            tablero.drawLine(x,1,x, 924);
-            x=x+33;
-        }
-        for (int y=0; y<924;){
-            tablero.drawLine(1,y,924, y);
-            y=y+33;
+        tablero=new ArrayList<Canvas>();
+        tablero.add(new Canvas("Jugador1"));
+        tablero.add(new Canvas("Jugador2"));
+        for(Canvas tableros: tablero){
+            for (int x=0; x<924;){
+                tableros.drawLine(x,1,x, 924);
+                x=x+33;
+            }
+            for (int y=0; y<924;){
+                tableros.drawLine(1,y,924, y);
+                y=y+33;
+            }
         }
     }
 
