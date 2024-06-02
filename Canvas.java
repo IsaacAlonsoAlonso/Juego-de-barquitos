@@ -27,7 +27,7 @@ public class Canvas
      */
     public Canvas(String title)
     {
-        this(title, 300, 300, Color.white);
+        this(title, 924, 924, Color.white);
     }
 
     /**
