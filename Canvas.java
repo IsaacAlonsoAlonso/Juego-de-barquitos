@@ -221,6 +221,12 @@ public class Canvas
         graphic.drawString(text, x, y);   
         canvas.repaint();
     }
+    
+    public void drawInt(int n,int x, int y){
+        String N =Integer.toString(n);
+        graphic.drawString(N,x,y);
+        canvas.repaint();
+    }
 
     /**
      * Erases a String on the Canvas.

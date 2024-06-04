@@ -31,6 +31,10 @@ public class game
                 tableros.drawLine(1,y,924, y);
                 y=y+33;
             }
+            for(int n=1; n<28;n){
+                int y=49;
+                
+            }
         }
     }
 
