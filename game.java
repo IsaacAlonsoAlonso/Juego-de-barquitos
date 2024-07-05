@@ -12,7 +12,8 @@ import java.util.HashMap;
 public class game
 {
     // instance variables - replace the example below with your own
-    private ArrayList<Canvas> tablero;
+    private ArrayList<Canvas> tablero = new ArrayList<Canvas>();
+    private ArrayList<barcos> barco = new ArrayList<barcos>();
     public HashMap<String,String> coordenadas =new HashMap();
     
     /**
@@ -20,8 +21,6 @@ public class game
      */
     public game()
     {
-        // initialise instance variables
-        tablero=new ArrayList<Canvas>();
         tablero.add(new Canvas("Jugador1"));
         tablero.add(new Canvas("Jugador2"));
         String abc ="ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
@@ -65,44 +64,16 @@ public class game
                 a++;
             }
         }
-    }
-    
-    
-    public void prueba(){
-        int a=0;
-        String abc ="ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-        while (a<27){
-            char letra = abc.charAt(a);
-            for(int b=1;b<28;b++){
-                String clave = Character.toString(letra) + b;
-                System.out.println(clave);
-            }
-            a++;
-        }
         
-    }
-    
-    public void prueba2(){
-        int y=51;
-        int x=51;
-        String coord="";
-        for(int hori=0;hori<28;hori++){
-            for(int n=1; n<28;n++){
-                    coord= y + " "+ x;
-                    y=y+34;
-                    for(Canvas tableros: tablero){
-                        String[] coordena =coord.split(" ");
-                        String coordy = coordena[0];
-                        String coordx = coordena[1];
-                        int coordY = Integer.parseInt(coordy);
-                        int coordX = Integer.parseInt(coordx);
-                        tableros.drawString("X",coordX,coordY);
-                    }
-                }
-            x=x+34;
-            y=51;
+        barco.add(new barcos());
+        for(barcos barca : barco){
+            HashSet<String> cordeBarco= barca.getCoordBarco();
+            for (String coor : cordeBarco){
+                crearCusdradoClave(coor);
+            }
         }
     }
+    
     
     public void prueba3 (String clave){
         String coord=coordenadas.get(clave);
@@ -116,7 +87,7 @@ public class game
                     }
     }
     
-    public void prueba4 (String clave){
+    public void crearCirculoConCLave (String clave){
         String coord=coordenadas.get(clave);
         for(Canvas tableros: tablero){
                         String[] coordena =coord.split(" ");
@@ -128,25 +99,36 @@ public class game
                     }
     }
     
-    public void prueba5(){
-        int y=51;
-        int x=51;
-        String coord="";
-        for(int hori=0;hori<28;hori++){
-            for(int n=1; n<28;n++){
-                    coord= y + " "+ x;
-                    y=y+34;
-                    for(Canvas tableros: tablero){
+    public void borrarCirculoConCLave (String clave){
+        String coord=coordenadas.get(clave);
+        for(Canvas tableros: tablero){
                         String[] coordena =coord.split(" ");
                         String coordy = coordena[0];
                         String coordx = coordena[1];
                         int coordY = Integer.parseInt(coordy);
                         int coordX = Integer.parseInt(coordx);
-                        tableros.fillCircle(coordX-15,coordY-15,30);
+                        tableros.eraseCircle(coordX-15,coordY-15,30);
                     }
-                }
-            x=x+34;
-            y=51;
+    }
+    
+    public void crearCusdradoClave(String clave){
+        String coord=coordenadas.get(clave);
+        for(Canvas tableros: tablero){
+                        String[] coordena =coord.split(" ");
+                        String coordy = coordena[0];
+                        String coordx = coordena[1];
+                        int coordY = Integer.parseInt(coordy);
+                        int coordX = Integer.parseInt(coordx);
+                        tableros.fillRectangle(coordX-17,coordY-17,34,34);
+                    }
+    }
+    
+    public String ataque(String clave){
+        String respuesta="";
+        for(barcos barca : barco){
+            respuesta=barca.tocadoOAgua(clave);
         }
+        borrarCirculoConCLave(clave);
+        return respuesta;
     }
 }
